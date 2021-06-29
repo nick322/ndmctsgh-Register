@@ -13,7 +13,7 @@ UserROCID = os.getenv('USER_ROCID')
 browser = webdriver.Chrome()
 
 browser.get(
-    'https://www2.ndmctsgh.edu.tw/NewWebReg/Register/Doctors?pos=B&DeptCode=110&DeptGroup=1#')
+    'https://www2.ndmctsgh.edu.tw/NewWebReg/Register/Doctors?pos=B&DeptCode=110&DeptGroup=1')
 
 # get var _schedules
 _schedules = browser.execute_script('return _schedules')
@@ -40,9 +40,9 @@ for week in _schedules:
                     # print('------------------------------')
                     print(f'\n')
 
-print(RowId)
+print('預約[]=> ', RowId)
 browser.get('https://www2.ndmctsgh.edu.tw/NewWebReg/')
-next_button = browser.find_element_by_xpath('/html/body/div/div/p[6]/a[1]')
+next_button = browser.find_element_by_xpath('/html/body/div/div/p[11]/a[1]')
 next_button.click()
 time.sleep(1)
 for id in RowId:
