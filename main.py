@@ -49,7 +49,7 @@ while True:
 
 browser.get('https://www2.ndmctsgh.edu.tw/NewWebReg/')
 next_button = browser.find_element_by_xpath(
-    '/html/body/div/div/p[11]/a[1]')
+    '/html/body/div/div/div/div/p[9]/a[1]')
 next_button.click()
 time.sleep(1)
 for id in RowId:
@@ -60,7 +60,7 @@ for id in RowId:
 
     with open('filename.jpg', 'wb') as file:
         file.write(browser.find_element_by_xpath(
-            '/html/body/div/div[2]/div/form/div[3]/div[2]/img').screenshot_as_png)
+            '/html/body/div/div/div/div[2]/div/form/div[3]/div[2]/img').screenshot_as_png)
 
     img = Image.open(r'.\filename.jpg')
     pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
@@ -68,15 +68,15 @@ for id in RowId:
     text = pytesseract.image_to_string(img, config=config)
     print(text)
     VerificationCode = browser.find_element_by_xpath(
-        '/html/body/div/div[2]/div/form/div[3]/div[2]/input')
+        '//*[@id="captcha"]')
     VerificationCode.clear()
     VerificationCode.send_keys(text)
     ROCID = browser.find_element_by_xpath(
-        '/html/body/div/div[2]/div/form/div[1]/div[2]/input')
+        '//*[@id="cnoid"]')
     ROCID.clear()
     ROCID.send_keys(UserROCID)
     while True:
-        if browser.current_url == ('https://www2.ndmctsgh.edu.tw/NewWebReg/Register/RegData?id=' + id):
+        if browser.current_url == ('https://www2.ndmctsgh.edu.tw/NewWebReg/Register/RegData?' + id ):
             print('WAIT')
             time.sleep(1)
         else:
